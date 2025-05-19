@@ -17,7 +17,8 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@nimbus/shared": "workspace:*"
+    "@nimbus/shared": "workspace:*",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "typescript": "^5.6.3",
