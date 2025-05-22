@@ -13,8 +13,12 @@
   "dependencies": {
     "@nimbus/rule-engine": "workspace:*",
     "@nimbus/shared": "workspace:*",
+    "@nimbus/stats": "workspace:*",
     "fastify": "^5.1.0",
     "zod": "^3.23.8"
+  },
+  "optionalDependencies": {
+    "ioredis": "^5.4.1"
   },
   "devDependencies": {
     "@types/node": "^22.9.0",
