@@ -3,7 +3,7 @@ import { buildServer } from "./server.js";
 
 async function main() {
   const config = loadConfig();
-  const app = buildServer(config);
+  const app = await buildServer(config);
   const host = "0.0.0.0";
   await app.listen({ port: config.PORT, host });
 }
