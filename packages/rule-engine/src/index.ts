@@ -7,7 +7,10 @@ export {
   type TargetingRule,
   type TargetingRuleInput,
   type EvaluationContext,
+  type SegmentResolver,
 } from "./types.js";
+
+export type { EvaluateOptions } from "./engine.js";
 
 export {
   parseRule,
