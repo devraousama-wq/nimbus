@@ -19,20 +19,28 @@ const ruleConditionSchema: z.ZodType<RuleCondition> = z.object({
   value: ruleConditionValueSchema,
 });
 
+const segmentRefKeySchema = z
+  .string()
+  .min(1)
+  .max(128)
+  .regex(/^[a-z][a-z0-9_-]*$/);
+
 const ruleGroupSchema: z.ZodType<RuleGroup> = z.lazy(() =>
   z
     .object({
       logic: z.enum(["and", "or", "not"]),
       conditions: z.array(ruleConditionSchema).optional(),
       groups: z.array(ruleGroupSchema).optional(),
+      segmentRefs: z.array(segmentRefKeySchema).optional(),
     })
     .superRefine((group, ctx) => {
       const hasConditions = (group.conditions?.length ?? 0) > 0;
       const hasGroups = (group.groups?.length ?? 0) > 0;
-      if (!hasConditions && !hasGroups) {
+      const hasRefs = (group.segmentRefs?.length ?? 0) > 0;
+      if (!hasConditions && !hasGroups && !hasRefs) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
-          message: "rule group must have at least one condition or nested group",
+          message: "rule group must have at least one condition, nested group, or segment ref",
         });
       }
       if (group.logic === "not" && (group.groups?.length ?? 0) > 1) {

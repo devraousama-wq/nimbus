@@ -29,7 +29,14 @@ export type RuleGroup = {
   logic: RuleGroupLogic;
   conditions?: RuleCondition[];
   groups?: RuleGroup[];
+  segmentRefs?: string[];
 };
+
+export type SegmentResolver = (
+  segmentKey: string,
+  context: EvaluationContext,
+  visiting: Set<string>,
+) => boolean;
 
 export type TargetingRule = {
   id: string;
