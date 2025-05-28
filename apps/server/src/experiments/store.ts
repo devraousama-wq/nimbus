@@ -42,7 +42,11 @@ export class ExperimentStore {
     if (!existing) {
       throw new ExperimentNotFoundError(key);
     }
-    const patch = updateExperimentSchema.parse({ ...input, key });
+    const body =
+      typeof input === "object" && input !== null
+        ? (input as Record<string, unknown>)
+        : {};
+    const patch = updateExperimentSchema.parse({ ...body, key });
     if (patch.variants) {
       validateExperimentVariants(patch.variants);
     }

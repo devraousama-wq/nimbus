@@ -17,3 +17,4 @@ export function createRequestId(): string {
 export * from "./flags.js";
 export * from "./bucketing.js";
 export * from "./experiments.js";
+export * from "./segments.js";

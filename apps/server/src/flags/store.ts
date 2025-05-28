@@ -68,7 +68,11 @@ export class FlagStore {
     if (!existing) {
       throw new FlagNotFoundError(key);
     }
-    const patch = updateFlagSchema.parse({ ...input, key });
+    const body =
+      typeof input === "object" && input !== null
+        ? (input as Record<string, unknown>)
+        : {};
+    const patch = updateFlagSchema.parse({ ...body, key });
     const next: FlagDefinition = flagDefinitionSchema.parse({
       ...existing,
       ...patch,
